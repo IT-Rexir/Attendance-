@@ -1,0 +1,66 @@
+[
+  {
+    "lrn": "120011130277",
+    "name": "Jul Rex S. Tabuan",
+    "grade": "12",
+    "strand": "ICT-TDA",
+    "section": "A",
+    "photo": "assets/default-avatar.png"
+  },
+  {
+    "lrn": "120011130281",
+    "name": "Maria Clara D. Santos",
+    "grade": "12",
+    "strand": "STEM",
+    "section": "B",
+    "photo": "assets/default-avatar.png"
+  },
+  {
+    "lrn": "120011130299",
+    "name": "John Michael P. Reyes",
+    "grade": "11",
+    "strand": "HUMSS",
+    "section": "A",
+    "photo": "assets/default-avatar.png"
+  },
+  {
+    "lrn": "120011130310",
+    "name": "Angel Faith R. Cruz",
+    "grade": "11",
+    "strand": "ABM",
+    "section": "C",
+    "photo": "assets/default-avatar.png"
+  },
+  {
+    "lrn": "120011130325",
+    "name": "Kim Denver L. Aguilar",
+    "grade": "10",
+    "strand": "N/A",
+    "section": "Rizal",
+    "photo": "assets/default-avatar.png"
+  },
+  {
+    "lrn": "120011130337",
+    "name": "Princess Joy M. Villanueva",
+    "grade": "12",
+    "strand": "GAS",
+    "section": "A",
+    "photo": "assets/default-avatar.png"
+  },
+  {
+    "lrn": "120011130344",
+    "name": "Mark Anthony B. Dela Cruz",
+    "grade": "12",
+    "strand": "ICT-TDA",
+    "section": "B",
+    "photo": "assets/default-avatar.png"
+  },
+  {
+    "lrn": "120011130358",
+    "name": "Shaina Mae T. Fernandez",
+    "grade": "11",
+    "strand": "STEM",
+    "section": "A",
+    "photo": "assets/default-avatar.png"
+  }
+]

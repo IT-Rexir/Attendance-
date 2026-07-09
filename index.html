@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#0b0b0b" />
+<title>Jagobiao National High School — Attendance Scanner</title>
+<link rel="icon" href="logo.png" type="image/png" />
+<link rel="stylesheet" href="style.css" />
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+  <!-- ============ LOADING SCREEN ============ -->
+  <div id="loading-screen">
+    <div class="loading-logo-wrap">
+      <div class="loading-ring"></div>
+      <img src="logo.png" alt="JNHS Logo" class="loading-logo" />
+    </div>
+    <div class="loading-text">
+      <h1>Jagobiao National High School</h1>
+      <span>Initializing Attendance System</span>
+    </div>
+    <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+  </div>
+
+  <!-- ============ SCANNER PAGE ============ -->
+  <div id="scanner-page">
+    <video id="camera-feed" autoplay playsinline muted></video>
+    <canvas id="capture-canvas" class="hidden"></canvas>
+
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="topbar-brand">
+        <img src="logo.png" alt="Logo" />
+        <div>
+          <div class="school-name">Jagobiao National HS</div>
+          <div class="school-sub">Attendance Scanner</div>
+        </div>
+      </div>
+      <a href="admin.html" class="status-pill glass" id="admin-link" title="Admin Dashboard">
+        <span class="status-dot"></span>
+        <span id="clock-display">--:--</span>
+      </a>
+    </div>
+
+    <!-- Scan overlay -->
+    <div class="scan-overlay">
+      <div class="scan-frame">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+        <div class="scan-line"></div>
+      </div>
+      <p class="scan-hint">Align the <b>Student ID</b> inside the frame. Scanning happens automatically.</p>
+    </div>
+
+    <div class="scan-status glass" id="scan-status">
+      <span class="scan-spinner"></span>
+      <span id="scan-status-text">Starting camera…</span>
+    </div>
+
+    <!-- Camera permission / error blocker -->
+    <div class="camera-blocker hidden" id="camera-blocker">
+      <div class="camera-blocker-card glass">
+        <div class="camera-blocker-icon">⚠</div>
+        <h3 id="blocker-title">Camera Access Needed</h3>
+        <p id="blocker-message">
+          This scanner needs access to your rear camera to read student IDs.
+          Please allow camera permission and reload the page.
+        </p>
+        <button class="btn btn-primary btn-block" id="retry-camera-btn">Try Again</button>
+        <a href="admin.html" class="back-to-scanner">Go to Admin Dashboard →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CONFIRMATION BOTTOM SHEET ============ -->
+  <div class="sheet-scrim" id="sheet-scrim"></div>
+  <div class="confirm-sheet glass" id="confirm-sheet">
+    <div class="sheet-handle"></div>
+
+    <div id="duplicate-banner" class="duplicate-banner hidden">
+      <span>⏱</span>
+      <span>Already Recorded Today</span>
+    </div>
+
+    <div class="confirm-header">
+      <img id="confirm-photo" class="confirm-photo" src="default-avatar.png" alt="Student photo" />
+      <div class="confirm-title">
+        <h3 id="confirm-name">—</h3>
+        <p>Please confirm this is the correct student</p>
+      </div>
+    </div>
+
+    <div class="confirm-grid">
+      <div class="confirm-field lrn">
+        <label>LRN</label>
+        <span id="confirm-lrn">—</span>
+      </div>
+      <div class="confirm-field">
+        <label>Grade</label>
+        <span id="confirm-grade">—</span>
+      </div>
+      <div class="confirm-field">
+        <label>Strand</label>
+        <span id="confirm-strand">—</span>
+      </div>
+      <div class="confirm-field">
+        <label>Section</label>
+        <span id="confirm-section">—</span>
+      </div>
+      <div class="confirm-field">
+        <label>Date</label>
+        <span id="confirm-date">—</span>
+      </div>
+      <div class="confirm-field">
+        <label>Time</label>
+        <span id="confirm-time">—</span>
+      </div>
+    </div>
+
+    <div class="confirm-actions">
+      <button class="btn btn-ghost btn-block" id="cancel-btn">Cancel</button>
+      <button class="btn btn-primary btn-block" id="confirm-btn">Confirm</button>
+    </div>
+  </div>
+
+  <!-- ============ SUCCESS POPUP ============ -->
+  <div class="success-overlay" id="success-overlay">
+    <div class="success-card glass">
+      <div class="check-wrap">
+        <svg class="checkmark" viewBox="0 0 52 52">
+          <circle class="checkmark-circle" cx="26" cy="26" r="23" />
+          <path class="checkmark-check" d="M14 27l7 7 17-17" />
+        </svg>
+      </div>
+      <h2>Attendance Recorded</h2>
+      <p id="success-name">—</p>
+      <span class="success-status-tag" id="success-status-tag">Present</span>
+      <span class="success-countdown">Returning to scanner in <span id="countdown-num">3</span>s…</span>
+    </div>
+  </div>
+
+  <!-- ============ TOAST ============ -->
+  <div class="toast glass" id="toast"></div>
+
+  <!-- Audio for success -->
+  <audio id="success-sound" src="success.mp3" preload="auto"></audio>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="database.js"></script>
+  <script src="students.js"></script>
+  <script src="scanner.js"></script>
+</body>
+</html>
