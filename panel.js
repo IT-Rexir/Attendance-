@@ -7,6 +7,7 @@
   "use strict";
 
   // Replace with your real Firebase Project configurations
+  // Your exact Firebase Project configurations applied to the global instance
   const firebaseConfig = {
     apiKey: "AIzaSyCmhmx-xWEvKDIjtt43IsqZduRP-EyTjIU",
     authDomain: "attendance-f61dc.firebaseapp.com",
@@ -20,7 +21,7 @@
 
   firebase.initializeApp(firebaseConfig);
   const dbRef = firebase.database().ref("attendance");
-
+  
   /* ---------- DOM refs ---------- */
   const loadingScreen = document.getElementById("loading-screen");
   const todayLabel = document.getElementById("today-label");
