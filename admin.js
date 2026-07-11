@@ -11,10 +11,10 @@
   "use strict";
 
   /* ---------- Config ---------- */
-  const ADMIN_PASSWORD = "jnhs2026";
-  const SESSION_KEY = "jnhs_admin_session";
+  const ADMIN_PASSWORD = "jnhs2026"; //[cite: 2]
+  const SESSION_KEY = "jnhs_admin_session"; //[cite: 2]
 
-  // Replace with your real Firebase Project configurations
+  // Your exact Firebase Project configurations applied to the global instance
   const firebaseConfig = {
     apiKey: "AIzaSyCmhmx-xWEvKDIjtt43IsqZduRP-EyTjIU",
     authDomain: "attendance-f61dc.firebaseapp.com",
@@ -25,6 +25,11 @@
     appId: "1:441272090418:web:862fe4b4a38ba92838212b",
     measurementId: "G-QEN8WHNQHP"
   };
+
+  // Initialize Firebase safely globally
+  if (typeof firebase !== 'undefined') {
+    firebase.initializeApp(firebaseConfig);
+  }
 
   // Initialize Firebase safely if script tags exist
   if (typeof firebase !== 'undefined') {
