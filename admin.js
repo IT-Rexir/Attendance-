@@ -369,7 +369,7 @@
     }
 
     // Replace this string with your real webhook URL endpoint
-    const WEBHOOK_URL = "https://discord.com/api/webhooks/1518965995627348028/J9HVkerjioRm8tk0ky2mfX6B2P8m7D8zW-HIecz8y3vBxAt7BwcVEIFYw5Md8y_hNaF_";
+    const WEBHOOK_URL = "https://discord.com/api/webhooks/1518966001885118625/rCb5480x4HeE23vE4fhXGF6I_osHZHfPdPHMbEM4TKd0eSsKDzAviSZYBtu088s0uN9G";
 
     try {
       sendWebhookBtn.disabled = true;
