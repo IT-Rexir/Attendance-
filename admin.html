@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0b0b0b" />
+<title>Admin Dashboard — Jagobiao National High School</title>
+<link rel="icon" href="logo.png" type="image/png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ LOADING SCREEN ============ -->
+  <div id="loading-screen">
+    <div class="loading-logo-wrap">
+      <div class="loading-ring"></div>
+      <img src="logo.png" alt="JNHS Logo" class="loading-logo" />
+    </div>
+    <div class="loading-text">
+      <h1>Jagobiao National High School</h1>
+      <span>Loading Admin Dashboard</span>
+    </div>
+    <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+  </div>
+
+  <!-- ============ LOGIN PAGE ============ -->
+  <div class="admin-login-page" id="login-page">
+    <div class="login-card glass">
+      <img src="logo.png" class="login-logo" alt="Logo" />
+      <h1>Admin Access</h1>
+      <p class="sub">Jagobiao National High School Attendance System</p>
+
+      <div id="login-error" class="login-error hidden">
+        <span>⚠</span>
+        <span id="login-error-text">Incorrect password. Please try again.</span>
+      </div>
+
+      <form id="login-form" style="width:100%">
+        <div class="field-group">
+          <label for="password-input">Password</label>
+          <div class="input-wrap">
+            <input type="password" id="password-input" placeholder="Enter admin password" autocomplete="current-password" required />
+            <button type="button" class="toggle-pw" id="toggle-pw">👁</button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+      </form>
+
+      <a href="index.html" class="back-to-scanner">← Back to Scanner</a>
+    </div>
+  </div>
+
+  <!-- ============ DASHBOARD PAGE ============ -->
+  <div class="admin-page hidden" id="dashboard-page">
+    <div class="topbar">
+      <div class="topbar-brand">
+        <img src="logo.png" alt="Logo" />
+        <div>
+          <div class="school-name">Admin Dashboard</div>
+          <div class="school-sub">Jagobiao National HS</div>
+        </div>
+      </div>
+      <div class="admin-topbar-right">
+        <button class="icon-btn" id="refresh-btn" title="Refresh data">⟳</button>
+        <button class="icon-btn" id="logout-btn" title="Log out">⏻</button>
+      </div>
+    </div>
+
+    <div class="admin-heading">
+      <h1>Attendance Overview</h1>
+      <p id="today-label">Loading today's summary…</p>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="stat-grid">
+      <div class="stat-card present glass">
+        <div class="stat-icon">✓</div>
+        <div class="stat-value" id="stat-present">0</div>
+        <div class="stat-label">Present Today</div>
+      </div>
+      <div class="stat-card total glass">
+        <div class="stat-icon">👥</div>
+        <div class="stat-value" id="stat-total">0</div>
+        <div class="stat-label">Total Students</div>
+      </div>
+      <div class="stat-card late glass">
+        <div class="stat-icon">⏱</div>
+        <div class="stat-value" id="stat-late">0</div>
+        <div class="stat-label">Late</div>
+      </div>
+      <div class="stat-card absent glass">
+        <div class="stat-icon">✕</div>
+        <div class="stat-value" id="stat-absent">0</div>
+        <div class="stat-label">Absent</div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="admin-controls glass">
+      <div class="input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Search by name, LRN, or section…" />
+      </div>
+      <div class="input-wrap">
+        <input type="date" id="date-filter" />
+      </div>
+    </div>
+
+    <div class="admin-actions-row">
+      <button class="btn btn-ghost btn-sm" id="export-csv-btn">⬇ Export CSV</button>
+      <button class="btn btn-ghost btn-sm" id="send-webhook-btn">🚀 Send Data</button>
+      <button class="btn btn-ghost btn-sm" id="clear-today-btn">🗑 Clear Today's Attendance</button>
+      <button class="btn btn-ghost btn-sm" id="clear-filter-btn">✕ Clear Filters</button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-card glass">
+      <div class="table-scroll">
+        <table class="attendance-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>LRN</th>
+              <th>Grade</th>
+              <th>Strand</th>
+              <th>Section</th>
+              <th>Date</th>
+              <th>Time In</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="attendance-tbody">
+            <!-- rows injected by admin.js -->
+          </tbody>
+        </table>
+      </div>
+      <div class="empty-state hidden" id="empty-state">
+        <div class="empty-icon">📋</div>
+        <h4>No attendance records</h4>
+        <p>Records will appear here once students are scanned.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ DELETE / CLEAR CONFIRM MODAL ============ -->
+  <div class="modal-scrim" id="modal-scrim">
+    <div class="modal-card glass">
+      <div class="modal-icon">🗑</div>
+      <h3 id="modal-title">Delete this record?</h3>
+      <p id="modal-message">This action cannot be undone.</p>
+      <div class="modal-btn-row">
+        <button class="btn btn-ghost" id="modal-cancel-btn">Cancel</button>
+        <button class="btn btn-danger" id="modal-confirm-btn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TOAST ============ -->
+  <div class="toast glass" id="toast"></div>
+
+  <script src="database.js"></script>
+  <script src="students.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
