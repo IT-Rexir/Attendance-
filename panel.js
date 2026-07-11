@@ -8,13 +8,14 @@
 
   // Replace with your real Firebase Project configurations
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    databaseURL: "YOUR_DATABASE_URL",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyCmhmx-xWEvKDIjtt43IsqZduRP-EyTjIU",
+    authDomain: "attendance-f61dc.firebaseapp.com",
+    databaseURL: "https://attendance-f61dc-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "attendance-f61dc",
+    storageBucket: "attendance-f61dc.firebasestorage.app",
+    messagingSenderId: "441272090418",
+    appId: "1:441272090418:web:862fe4b4a38ba92838212b",
+    measurementId: "G-QEN8WHNQHP"
   };
 
   firebase.initializeApp(firebaseConfig);
